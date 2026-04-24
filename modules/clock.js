@@ -16,19 +16,19 @@ export class Clock {
   
   async themesGetter() {
 		//console.log("Starting Base Themes Getter")
-		let baseSkip = game.settings.get("lancer-clocks","baseThemeToggle")
-		let extraSkip = game.settings.get("lancer-clocks","extraThemeToggle")
-		let extraPath = game.settings.get("lancer-clocks","extraPaths")
+		let baseSkip = game.settings.get("lancer-clocks-webm","baseThemeToggle")
+		let extraSkip = game.settings.get("lancer-clocks-webm","extraThemeToggle")
+		let extraPath = game.settings.get("lancer-clocks-webm","extraPaths")
 		
 		if (!(baseSkip)) { //Due to recent performance concerns, we need to be able to skip past this if the user desires such.
-			let baseThemesPicker = await FilePicker.browse("data", "modules/lancer-clocks/themes")
+			let baseThemesPicker = await FilePicker.browse("data", "modules/lancer-clocks-webm/themes")
 			let tempDirs = baseThemesPicker.dirs;
 			let newDirs = [];
 			let newPaths = [];
 			let baseDirCheck = false;
 			tempDirs.forEach((dirItem) => {
-				let newDirItem = dirItem.replace("modules/lancer-clocks/themes/","");
-				if (dirItem.startsWith("modules/lancer-clocks/themes/")) {
+				let newDirItem = dirItem.replace("modules/lancer-clocks-webm/themes/","");
+				if (dirItem.startsWith("modules/lancer-clocks-webm/themes/")) {
 					newDirs.push(newDirItem);
 					newPaths.push(dirItem);
 					//console.log(dirItem)
@@ -160,7 +160,7 @@ export class Clock {
       theme: old.theme,
       size: old.size,
       progress: old.progress + 1,
-	  webm: this.webm
+	  webm: old.webm
     });
   }
 
@@ -170,7 +170,7 @@ export class Clock {
       theme: old.theme,
       size: old.size,
       progress: old.progress - 1,
-	  webm: this.webm
+	  webm: old.webm
     });
   }
 

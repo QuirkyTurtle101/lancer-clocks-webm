@@ -20,8 +20,8 @@ export class ClockSheet extends ActorSheet {
 	  return mergeObject(
       super.defaultOptions,
       {
-        classes: ["lancer-clocks", "sheet", `lancer-clocks-system-${game.data.system.id}`, "actor", "npc"],
-        template: "modules/lancer-clocks/templates/sheet.html",
+        classes: ["lancer-clocks-webm", "sheet", `lancer-clocks-webm-system-${game.data.system.id}`, "actor", "npc"],
+        template: "modules/lancer-clocks-webm/templates/sheet.html",
         width: 375,
         height: 600,
         ...supportedSystem.sheetDefaultOptions
@@ -89,7 +89,7 @@ export class ClockSheet extends ActorSheet {
         theme: clock.theme,
         webm: clock.webm,
         image: {
-          url: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${webm ? 'webm' : 'png'}`,
+          url: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
           width: clock.image.width,
           height: clock.image.height
         },
@@ -164,7 +164,7 @@ export class ClockSheet extends ActorSheet {
 	});
 	
   // pick file extension based on checkbox
-  let fileExt = clock.webm ? 'png' : 'webm';
+  let fileExt = clock.webm ? 'webm' : 'png';
 
     const tokens = actor.getActiveTokens();
 	//console.log(tokens)
@@ -195,7 +195,7 @@ export class ClockSheet extends ActorSheet {
     const persistObj = await this.system.persistClockToActor({ actor, clock });
 	if (verMajor == "11"){
 		visualObj = await {
-			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
+			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
 			token: {
 				img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
 				...DEFAULT_TOKEN
@@ -203,7 +203,7 @@ export class ClockSheet extends ActorSheet {
 		};
 	} else {
 		visualObj = await {
-			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
+			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
 			prototypeToken:{
 				texture: {
 					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`

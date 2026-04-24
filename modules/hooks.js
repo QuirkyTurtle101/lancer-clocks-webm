@@ -6,15 +6,15 @@ Hooks.once("init", () => {
 	log(`Init ${game.data.system.id}`);
 	ClockSheet.register();
 	let tradePath = "";
-	if (localStorage.getItem("lancer-clocks.extraPaths") == null) {
-		tradePath = "lancer-clocks"
+	if (localStorage.getItem("lancer-clocks-webm.extraPaths") == null) {
+		tradePath = "lancer-clocks-webm"
 		log("No old settings.")
 	}  else {
 	    	log("Old settings found.")
-	    	tradePath = localStorage.getItem("lancer-clocks.extraPaths")	
+	    	tradePath = localStorage.getItem("lancer-clocks-webm.extraPaths")	
 	}
   
-	game.settings.register("lancer-clocks","extraPaths",{
+	game.settings.register("lancer-clocks-webm","extraPaths",{
 		name: 'Extra Lancer Clocks Path',
 		hint: 'This is the directory within the data path for custom clocks. This gets created automatically should it not already exist. This is stored on a per-world basis for more reliability.',
 		scope: 'world',
@@ -23,7 +23,7 @@ Hooks.once("init", () => {
 		default: tradePath,
 	});
   
-	game.settings.register("lancer-clocks","baseThemeToggle",{
+	game.settings.register("lancer-clocks-webm","baseThemeToggle",{
 		name: 'Disable Base Theme Check',
 		hint: 'Disable the checking of base themes for faster performance.',
 		scope: 'world',
@@ -32,7 +32,7 @@ Hooks.once("init", () => {
 		default: false,
 	});
   
-	game.settings.register("lancer-clocks","extraThemeToggle",{
+	game.settings.register("lancer-clocks-webm","extraThemeToggle",{
 		name: 'Disable Extra Theme Check',
 		hint: 'Disable the checking of extra themes for faster performance. Do not have both this and Disable Base Theme Check enabled at the same time.',
 		scope: 'world',
@@ -41,7 +41,7 @@ Hooks.once("init", () => {
 		default: false,
 	});
   
-	let extraPath = game.settings.get("lancer-clocks","extraPaths");
+	let extraPath = game.settings.get("lancer-clocks-webm","extraPaths");
 	if (!(extraPath.endsWith("/"))) {
 			extraPath = extraPath+"/"
 	};
@@ -55,7 +55,7 @@ Hooks.once("init", () => {
 
 Hooks.once("ready", () => {
     // Module title
-    const MODULE_TITLE = game.modules.get("lancer-clocks").title;
+    const MODULE_TITLE = game.modules.get("lancer-clocks-webm").title;
   
     const FALLBACK_MESSAGE_TITLE = "Welcome to Lancer Clocks";
     const FALLBACK_MESSAGE = `<large>
@@ -72,14 +72,14 @@ Hooks.once("ready", () => {
     const DONT_REMIND_AGAIN_KEY = "popup-dont-remind-again";
   
     // Dialog code
-    game.settings.register("lancer-clocks", DONT_REMIND_AGAIN_KEY, {
+    game.settings.register("lancer-clocks-webm", DONT_REMIND_AGAIN_KEY, {
       name: "",
       default: false,
       type: Boolean,
       scope: "world",
       config: false,
     });
-    if (game.user.isGM && !game.settings.get("lancer-clocks", DONT_REMIND_AGAIN_KEY)) {
+    if (game.user.isGM && !game.settings.get("lancer-clocks-webm", DONT_REMIND_AGAIN_KEY)) {
       new Dialog({
           title: FALLBACK_MESSAGE_TITLE,
           content: FALLBACK_MESSAGE,
@@ -87,7 +87,7 @@ Hooks.once("ready", () => {
               dont_remind: {
                   icon: '<i class="fas fa-times"></i>',
                   label: "Don't remind me again",
-                  callback: () => game.settings.set("lancer-clocks", DONT_REMIND_AGAIN_KEY, true),
+                  callback: () => game.settings.set("lancer-clocks-webm", DONT_REMIND_AGAIN_KEY, true),
               },
           },
           default: "dont_remind",
