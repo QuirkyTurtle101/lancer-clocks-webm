@@ -82,7 +82,7 @@ export class Clock {
 		//console.log("Ending Extra Themes Getter")
   }
 
-  constructor ({ theme, size, progress } = {}) {
+  constructor ({ theme, size, progress, webm } = {}) {
 		this.themesPromise = new Promise((resolve,reject) => {
 			this.themesGetter().finally(() => {
 				resolve()
@@ -107,6 +107,8 @@ export class Clock {
     this._theme = theme || this._themes?.[0] || this._extraThemes?.[0] || "lancer_wallflower_green";
 	//let testingThemes = FilePicker.browse("data", "modules/lancer-clocks/themes").then(data => {console.log(data)});
 	//console.log(testingThemes);
+
+	this._webm = webm;
   }
 
   get theme () {
@@ -121,6 +123,10 @@ export class Clock {
     return this._progress;
   }
 
+  get webm () {
+	return this._webm;
+  }
+
   get image () {
     return { 
       width: 350,
@@ -133,7 +139,8 @@ export class Clock {
       clocks: {
         theme: this._theme,
         size: this._size,
-        progress: this._progress
+        progress: this._progress,
+		webm: this.webm
       }
     };
   }
@@ -142,7 +149,8 @@ export class Clock {
     return new Clock({
       theme: this.theme,
       size: Clock.sizes[nextIndexInArray(Clock.sizes, this.size)],
-      progress: this.progress
+      progress: this.progress,
+	  webm: this.webm
     });
   }
 
@@ -151,7 +159,8 @@ export class Clock {
     return new Clock({
       theme: old.theme,
       size: old.size,
-      progress: old.progress + 1
+      progress: old.progress + 1,
+	  webm: this.webm
     });
   }
 
@@ -160,7 +169,8 @@ export class Clock {
     return new Clock({
       theme: old.theme,
       size: old.size,
-      progress: old.progress - 1
+      progress: old.progress - 1,
+	  webm: this.webm
     });
   }
 
@@ -168,10 +178,11 @@ export class Clock {
     return clock
       && clock._progress === this._progress
       && clock._size === this._size
-      && clock._theme === this._theme;
+      && clock._theme === this._theme
+	  && clock._webm === this._webm;
   }
 
   toString () {
-    return `${this._progress}/${this._size} • ${this._theme}`;
+    return `${this._progress}/${this._size} • ${this._theme} ${this._webm}`;
   }
 }

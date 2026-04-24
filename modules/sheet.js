@@ -87,8 +87,9 @@ export class ClockSheet extends ActorSheet {
         progress: clock.progress,
         size: clock.size,
         theme: clock.theme,
+        webm: clock.webm,
         image: {
-          url: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
+          url: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${webm ? 'webm' : 'png'}`,
           width: clock.image.width,
           height: clock.image.height
         },
@@ -121,7 +122,8 @@ export class ClockSheet extends ActorSheet {
       this.updateClock(new Clock({
         theme: oldClock.theme,
         progress: 0,
-        size: oldClock.size
+        size: oldClock.size,
+        webm: oldClock.webm
       }));
     });
 	
@@ -136,7 +138,8 @@ export class ClockSheet extends ActorSheet {
     let newClock = new Clock({
       progress: oldClock.progress,
       size: form.size,
-      theme: form.theme
+      theme: form.theme,
+      webm: form.webm
     });
     await this.updateClock(newClock);
   }
@@ -160,21 +163,25 @@ export class ClockSheet extends ActorSheet {
 		themeDict[themeItem] = compiledThemePaths[compiledThemes.indexOf(themeItem)]
 	});
 	
+  // pick file extension based on checkbox
+  let fileExt = clock.webm ? 'png' : 'webm';
+
     const tokens = actor.getActiveTokens();
 	//console.log(tokens)
 	//console.log(clock.theme)
 	let verMajor = `${game.version}`.slice(0,2)
+
 	//console.log(verMajor)
     for (const t of tokens) {
 		if (verMajor == "11") {
 			await t.document.update({
-				img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
+				img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
 				actorLink: true
 			});
 		} else {
 			await t.document.update({
 				texture: {
-					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`
+					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`
 					},
 				actorLink: true
 			});
@@ -188,24 +195,24 @@ export class ClockSheet extends ActorSheet {
     const persistObj = await this.system.persistClockToActor({ actor, clock });
 	if (verMajor == "11"){
 		visualObj = await {
-			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
+			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
 			token: {
-				img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
+				img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
 				...DEFAULT_TOKEN
 			}
 		};
 	} else {
 		visualObj = await {
-			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`,
+			img: `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`,
 			prototypeToken:{
 				texture: {
-					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`
+					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`
 				},
 				...DEFAULT_TOKEN
 			},
 			token: {
 				texture: {
-					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.png`
+					"src": `${themeDict[clock.theme]}/${clock.size}clock_${clock.progress}.${fileExt}`
 				},
 				...DEFAULT_TOKEN
 			}
