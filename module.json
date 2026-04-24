@@ -1,17 +1,16 @@
 {
-  "name": "lancer-clocks",
-  "id": "lancer-clocks",
-  "title": "Lancer Clocks",
-  "description": "Lancer-themed progress clocks. Usable with every system and supports custom themes.",
-  "author": "Argonius-Angelus",
+  "name": "lancer-clocks-webm",
+  "id": "lancer-clocks-webm",
+  "title": "Lancer Clocks w/ WebM Support",
+  "description": "Lancer-themed progress clocks. Usable with every system and supports custom themes. Modified to support WebM",
+  "author": "QuirkyTurtle101",
   "authors": [
     {
-      "name": "Argonius-Angelus"
+      "name": "QuirkyTurtle101"
     }
   ],
-  "url": "https://github.com/Argonius-Angelus/fvtt-clocks",
-  "manifest": "https://raw.githubusercontent.com/Argonius-Angelus/lancer-clocks/main/module.json",
-  "download": "https://github.com/Argonius-Angelus/lancer-clocks/archive/L1.0.30.zip",
+  "url": "https://github.com/QuirkyTurtle101/lancer-clocks-webm",
+  "manifest": "https://raw.githubusercontent.com/QuirkyTurtle101/lancer-clocks-webm/main/module.json",
   "version": "1.0.30",
   "minimumCoreVersion": "11",
   "compatibleCoreVersion": "11",
