@@ -59,7 +59,7 @@
       </select>
     </div>
     <div class="clock-config-group">
-      <input name="webm" type="checkbox" {{checked webm}} checked={{clock.webm}}/>
+      <input name="webm" type="checkbox" {{checked webm}} {{#if clock.webm}} checked = true {{/if}} />
     </div>
   </div>
   {{/if}}
